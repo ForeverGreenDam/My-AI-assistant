@@ -1,5 +1,7 @@
 server:
   port: 33453
+  servlet:
+    context-path: /ai
 spring:
   profiles:
     active: dev
