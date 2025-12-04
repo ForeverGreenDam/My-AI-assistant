@@ -5,6 +5,8 @@ server:
 spring:
   profiles:
     active: dev
+  messages:
+    basename: i18n/messages
 langchain4j:
   open-ai:
     chat-model:
