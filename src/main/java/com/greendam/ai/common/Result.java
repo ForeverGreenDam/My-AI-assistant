@@ -1,6 +1,7 @@
 package com.greendam.ai.common;
 
 import com.greendam.ai.common.constants.HttpStatus;
+import com.greendam.ai.common.utils.MessageUtil;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -103,7 +104,7 @@ public class Result<T> implements Serializable {
      * @return 成功响应对象
      */
     public static <T> Result<T> ok() {
-        return restResult(null, SUCCESS, "operation.successful");
+        return restResult(null, SUCCESS, MessageUtil.getMessage("operation.successful"));
     }
 
     /**
@@ -115,7 +116,7 @@ public class Result<T> implements Serializable {
      * @return 成功响应对象
      */
     public static <T> Result<T> ok(T data) {
-        return restResult(data, SUCCESS, "operation.successful");
+        return restResult(data, SUCCESS, MessageUtil.getMessage("operation.successful"));
     }
 
     /**
@@ -151,7 +152,7 @@ public class Result<T> implements Serializable {
      * @return 失败响应对象
      */
     public static <T> Result<T> fail() {
-        return restResult(null, FAIL, "operation.failed");
+        return restResult(null, FAIL, MessageUtil.getMessage("operation.failed"));
     }
 
     /**
@@ -175,7 +176,7 @@ public class Result<T> implements Serializable {
      * @return 失败响应对象
      */
     public static <T> Result<T> fail(T data) {
-        return restResult(data, FAIL, "operation.failed");
+        return restResult(data, FAIL, MessageUtil.getMessage("operation.failed"));
     }
 
     /**
