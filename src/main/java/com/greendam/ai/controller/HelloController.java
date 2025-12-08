@@ -3,6 +3,8 @@ package com.greendam.ai.controller;
 
 import com.greendam.ai.common.Result;
 import com.greendam.ai.common.utils.MessageUtil;
+import dev.langchain4j.model.openai.OpenAiChatModel;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/hello")
 @Slf4j
 public class HelloController {
+    @Resource
+    private OpenAiChatModel model;
     /**
      * <h3>健康检查接口</h3>
      *
@@ -38,5 +42,17 @@ public class HelloController {
     @GetMapping("/i18n/{text}")
     public Result<String> i18n(@PathVariable("text") String text){
         return Result.ok(MessageUtil.getMessage("test.i18n", new String[]{text}));
+    }
+    /**
+     * <h3>简单对话测试接口</h3>
+     * <p>用于测试大模型的聊天功能，只能完成简单的对话，无法设置系统指令</p>
+     *
+     * @param message 聊天的内容
+     * @return LLM的回复结果
+     */
+    @GetMapping("/chat/{message}")
+    public Result<String> chat(@PathVariable("message") String message){
+        String result = model.chat(message);
+        return Result.ok(result);
     }
 }
