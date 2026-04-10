@@ -2,6 +2,7 @@ server:
   port: 33453
   servlet:
     context-path: /ai
+
 spring:
   profiles:
     active: dev
@@ -9,12 +10,35 @@ spring:
     basename: i18n/message
     encoding: UTF-8
     cache-duration: 3600
+
+  # ====================== Redis 向量数据库（正确配置）======================
+  data:
+    redis:
+      host: ${redis.host}
+      port: ${redis.port}
+      password: ${redis.password}
+      timeout: 5000
+      connect-timeout: 5000
+      database: 3
+
+  # ====================== MySQL 数据库（完整可运行）======================
+  datasource:
+    url: jdbc:mysql://${mysql.host}:${mysql.port}/${mysql.database}?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull
+    username: ${mysql.username}
+    password: ${mysql.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      max-lifetime: 1800000
+      maximum-pool-size: 10
+      minimum-idle: 5
+
+# ====================== 通义千问 AI 配置（你原来的）======================
 langchain4j:
   open-ai:
     chat-model:
       base-url: https://dashscope.aliyuncs.com/compatible-mode/v1
       api-key: ${langchain4j.api-key}
-      model-name: qwen-flash
+      model-name: qwen3.5-plus
     embedding-model:
       base-url: https://dashscope.aliyuncs.com/compatible-mode/v1
       api-key: ${langchain4j.api-key}
@@ -23,7 +47,4 @@ langchain4j:
     redis:
       host: ${redis.host}
       port: ${redis.port}
-
-
-
-
+      password: ${redis.password}
