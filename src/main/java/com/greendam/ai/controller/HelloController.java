@@ -55,4 +55,15 @@ public class HelloController {
         String result = model.chat(message);
         return Result.ok(result);
     }
+
+    /**
+     * <h3>Hello接口</h3>
+     * <p>返回Hello字符串</p>
+     *
+     * @return 包含Hello字符串的统一响应结果
+     */
+    @GetMapping
+    public Result<String> hello(){
+        return Result.ok("Hello");
+    }
 }
