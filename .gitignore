@@ -1,3 +1,10 @@
 /.idea
+/.run
 /target
 /src/main/resources/application-dev.yml
+/.classpath
+/.project
+/.factorypath
+/.settings/
+/bin/
+/.run/
